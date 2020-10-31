@@ -1,4 +1,3 @@
-import tensorflow as tf
 from CookieTTS.utils.text.symbols import symbols
 
 
@@ -16,7 +15,7 @@ def create_hparams(hparams_string=None, verbose=False):
         seed=1234,
         dynamic_loss_scaling=True,
         fp16_run=True,
-        distributed_run=True,
+        distributed_run=False,
         dist_backend="nccl",
         dist_url="tcp://127.0.0.1:54321",
         cudnn_enabled=True,
@@ -31,7 +30,7 @@ def create_hparams(hparams_string=None, verbose=False):
         check_files=True, # check all files exist, aren't corrupted, have text, good length, and other stuff before training.
                           # This can take a little as it has to simulate an entire EPOCH of dataloading.
         load_mel_from_disk=True, # Saves significant RAM and CPU.
-        speakerlist='/media/cookie/Samsung 860 QVO/ClipperDatasetV2/filelists/speaker_ids.txt', # lets the checkpoints include speaker names.
+        speakerlist='/content/cookietts/CookieTTS/_1_preprocess/speaker_info.txt', # lets the checkpoints include speaker names.
         dict_path='../../dict/merged.dict.txt',
         p_arpabet=0.5, # probability to use ARPAbet / pronounciation dictionary.
         use_saved_speakers=True,# use the speaker lookups saved inside the model instead of generating again
@@ -43,8 +42,8 @@ def create_hparams(hparams_string=None, verbose=False):
                                    # Mellotron repo has this off by default, but ON makes the most logical sense to me.
         raw_speaker_ids=False,  # use the speaker IDs found in filelists for the internal IDs. Values greater than n_speakers will crash (as intended).
                                 # This will disable sorting the ids
-        training_files='/media/cookie/Samsung 860 QVO/ClipperDatasetV2/filelists/mel_train_taca2.txt',
-        validation_files='/media/cookie/Samsung 860 QVO/ClipperDatasetV2/filelists/mel_validation_taca2.txt',
+        training_files='/content/cookietts/CookieTTS/_1_preprocess/datasets/filelist_train.txt',
+        validation_files='/content/cookietts/CookieTTS/_1_preprocess/datasets/filelist_validation.txt',
         text_cleaners=['basic_cleaners'],
         
         silence_value=-11.52,
