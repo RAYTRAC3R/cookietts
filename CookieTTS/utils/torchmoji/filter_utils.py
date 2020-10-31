@@ -4,7 +4,6 @@ from __future__ import print_function, division, unicode_literals
 import sys
 import re
 import string
-import emoji
 from itertools import groupby
 
 import numpy as np
