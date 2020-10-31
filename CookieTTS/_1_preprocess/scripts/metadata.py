@@ -4,61 +4,8 @@ from glob import glob
 
 def identify_transcript_storage(directory, audio_files, audio_ext, audio_basename_lookup, txt_files, txt_names, txt_name_lookup):
     """figure out where/how the transcripts are stored"""
-    transcript = None
-    
-    # 2.1.1 test if txts use Clipper Format
-    # check how many of the first 20 audio files have a matching txt (in the same dir)
-    set_txt_files = set(txt_files)
-    files_with_txts = 0
-    for i, audio_file in enumerate(audio_files):
-        if audio_file.replace(audio_ext,'.txt') in set_txt_files:
-            files_with_txts += 1
-    print(f'Found {files_with_txts} audio files with matching text files (of {len(audio_files)} total audio files).')
-    if files_with_txts >= len(audio_files)*0.9: # if atleast 90% of audio files have a matching txt
-        return ["clipper",]
-    del files_with_txts, set_txt_files
-    
-    # 2.1.2 test if txts use Tacotron (or LJSpeech) Style Format
-    #look for txt or csv file with more than 3 lines and containing '|' chars.
-    n_valid_txts = 0
-    valid_txts = list()
-    for txt_file in txt_files:
-        if os.stat(txt_file).st_size > 80: # if txt_file has a reasonable size
-            text = open(txt_file, "r").read()
-            n_pipes = text.count('|') # get number of pipe symbols
-            n_nl = text.count('\n') # get number of newline symbols
-            if n_pipes > 2 and n_nl > 0: # if the text file has more than 2 pipes and a newline symbol
-                prev_wd_ = os.getcwd()
-                if os.path.split(txt_file)[0]:# move into txt dir (in-case the audio paths are relative)
-                    os.chdir(os.path.split(txt_file)[0])
-                paths = [x.split("|")[0] for x in text.split("\n") if len(x.strip())] # get paths
-                #n_exists = sum([os.path.exists(x) for x in paths]) # check how many paths exist
-                n_exists = sum([os.path.splitext(os.path.split(x)[1])[0] in audio_basename_lookup.keys() for x in paths]) # check how many names exist
-                if n_exists/len(paths) > 0.95: # if more than 95% of the paths in the left-most section contain existing files
-                    n_valid_txts += 1 # add it as a valid txt file
-                    valid_txts.append(txt_file) # and save the txt files path (relative to the dataset root)
-                os.chdir(prev_wd_)
-                del n_exists, prev_wd_
-            del text, n_pipes, n_nl
-    if n_valid_txts == 1:
-        return "ljspeech", valid_txts
-    elif n_valid_txts > 1:
-        return "tacotron", valid_txts
-    del n_valid_txts, valid_txts
-    
-    # 2.1.3 test if txts use VCTK Style Format
-    # for each audio file, check if a text file exists of the same name, but in another directory.
-    n_audio_files_with_txt = 0
-    txt_basenames = [os.path.splitext(os.path.split(txt_file)[-1])[0] for txt_file in txt_files]
-    for audio_file in audio_files:
-        audio_basename = os.path.splitext(os.path.split(audio_file)[-1])[0]
-        if audio_basename in txt_basenames:
-            n_audio_files_with_txt+=1
-    
-    if n_audio_files_with_txt/len(audio_files) > 0.9: # if more than 90% of audio files have a txt file with the same name, but in different directories
-        return ["vctk",] # return vctk
-    
-    raise NotImplementedError(f'Could not identify transcript type for the "{directory}" dataset')
+    transcript = "clipper"
+    return ["clipper",]
 
 
 def filelist_get_transcript(audio_file, filelist, filelist_paths, filelist_names, filelist_basenames):
