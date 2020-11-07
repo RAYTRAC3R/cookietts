@@ -13,3 +13,4 @@ py7zr
 syllables
 pyworld
 pyloudnorm
+emoji
