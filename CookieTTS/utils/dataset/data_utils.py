@@ -527,9 +527,9 @@ class TTSDataset(torch.utils.data.Dataset):
             [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0] -> [0, 1, 10, 2, 3, 4, 5, 6, 7, 8, 9]
         """
         if numeric_sort:
-            speaker_ids_in_filelist = [int(x[2]) for x in filelist]
+            speaker_ids_in_filelist = [int(x[3]) for x in filelist]
         else:
-            speaker_ids_in_filelist = [str(x[2]) for x in filelist]
+            speaker_ids_in_filelist = [str(x[3]) for x in filelist]
         speaker_ids = np.sort(np.unique(speaker_ids_in_filelist))
         d = {int(speaker_ids[i]): i for i in range(len(speaker_ids))}
         return d
@@ -890,7 +890,7 @@ class TTSDataset(torch.utils.data.Dataset):
         if self.force_load:
             while output is None:
                 try:
-                    audiopath, text, speaker_id_ext, *_ = self.filelist[index]
+                    audiopath, text, phonetictext, speaker_id_ext, *_ = self.filelist[index]
                     output = self.get_item_from_fileline(index, audiopath, text, speaker_id_ext)
                 except Exception as ex:
                     print(f"Failed to load '{audiopath}'")
