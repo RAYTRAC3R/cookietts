@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>The Text to Speech App</title>
+    <title>BFDAI Ngrok TTS App</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <style>
     .collapsible {
@@ -51,11 +51,11 @@
 <body>
     <div class="w-50 p-3 ml-3" style="margin: auto auto!important;">
         <a href="/">Home/Reset</a>
-        <div style="float: right;">Send Feedback to <a href="mailto:cookietriplep@gmail.com" title="You can send whatever to this email, I reply to about 50% of what comes in.">cookietriplep@gmail.com</a></div>
+        <div style="float: right;">Join the <a href="https://discord.com/invite/w76J7pJ" title="Discord">Discord</a></div>
         
         <div id="content" class="jumbotron">
             <h1 class="display-4">Text To Speech </h1>
-            <p class="lead">Based on NVIDIA Tacotron2 and WaveGlow TTS models.</p>
+            <p class="lead">Inspired by Cookie's MLP Ngrok model.</p>
             <hr class="my-4">
             <form id="input_form" name="input_form" method="POST" action="/tts">
                 <div class="form-group">
@@ -186,12 +186,11 @@
             <button class="collapsible active" type="button" style="background-color: #e9ecef;color: #212529;border: 1px solid #d1d4d7;">Credits</button>
             <div class="form-group content">
                 <ul style="margin-top: 0.5em;">
-                    <li style=""><a href="https://github.com/NVIDIA/tacotron2">Tacotron2</a> and <a href="https://github.com/yoyololicon/constant-memory-waveglow">WaveGlow</a> models trained and modified by <b>Cookie</b></li>
+                    <li style=""><a href="https://github.com/NVIDIA/tacotron2">Tacotron2</a> model trained by <b>Sami</b>, using a repository by <b>Cookie</b></li>
                     <li style="">Website written/adapted from <a href="https://github.com/Verssae/flask-tacotron2-tts-web-app">Verssae</a> by <b>Cookie</b></li>
                     <li style="">Initial <a href="https://github.com/Twibot-ai/audio_proj_utils">Dataset Processing</a> and technical help from <b>Twibot</b></li>
-                    <li style=""><b>Clipper</b> (and <b>many</b> anons) who labeled, cleaned, sourced and curated the amazing My Little Pony Dataset used.</li>
-                    <li style=""><b>Synthbot</b> who is much better at maths than me.</li>
-                    <li style=""><b>Synthbot</b> who hosts phonetically aligned and cleaned up copies of the Dataset for anyone to use.</li>
+                    <li style=""><b>Clipper</b>, who inspired my own dataset with their MLP one.</li>
+                    <li style=""><b>Synthbot</b> who is much better at maths than Cookie.</li>
                 </ul>
             </div>
         </div>
