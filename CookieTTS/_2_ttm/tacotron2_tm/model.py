@@ -15,7 +15,7 @@ from CookieTTS.utils.model.GPU import to_gpu
 from CookieTTS.utils.model.utils import get_mask_from_lengths, dropout_frame
 
 from CookieTTS._2_ttm.tacotron2_ssvae.nets.SylpsNet import SylpsNet
-from CookieTTS._2_ttm.tacotron2_tm.modules_vae import ReferenceEncoder
+from CookieTTS._2_ttm.tacotron2_tm.modules import ReferenceEncoder
 from CookieTTS._2_ttm.untts.model import MaskedBatchNorm1d, LnBatchNorm1d
 
 drop_rate = 0.5
